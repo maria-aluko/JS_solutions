@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pancake Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="image-container">
+        <img src="pancake.jpeg" alt="Delicious pancakes" />
+        <div class="price-banner"><span id="totalPrice">$5</span></div>
+      </div>
+      
+      <div class="form-container">
+        <h2>Customize Your Pancake</h2>
+
+        <div class="customization-section">
+          <label for="type">Choose your pancake type:</label>
+          <select id="type">
+            <option value="5">Classic - $5</option>
+            <option value="6">Chocolate - $6</option>
+            <option value="7">Blueberry - $7</option>
+          </select>
+        </div>
+
+        <div class="customization-section">
+          <p>Select your toppings ($1 each):</p>
+          <label><input type="checkbox" id="nuts" value="1" />Nuts<br /></label>
+          <label><input type="checkbox" id="bananas" value="1" />Bananas<br /></label>
+          <label><input type="checkbox" id="syrup" value="1" />Syrup<br /></label>
+        </div>
+
+        <div class="customization-section">
+          <p>Add extras:</p>
+          <label><input type="checkbox" id="whippedCream" value="2" />Whipped Cream -
+          $2<br /></label>
+          <label><input type="checkbox" id="iceCream" value="3" />Ice Cream - $3<br /></label>
+        </div>
+
+        <div class="price-display">
+          <h3>Total Price: <span id="totalPrice">$5</span></h3>
+        </div>
+
+        <div class="customer-container">
+          <h2>Delivery Information</h2>
+          <p>Please enter your name:</p>
+            <input type="text" id="customerName" value="" placeholder="Your name" required/>
+        </div>
+        <div class="delivery-container">
+          <p>Choose your delivery method:</p>
+          <input type="radio" id="eatIn" name="deliveryBtn" value="0" required/>
+          <label for="eatIn">Eat In</label>
+
+          <input type="radio" id="pickUp" name="deliveryBtn" value="0" />
+          <label for="pickUp">Pick Up</label>
+
+          <input type="radio" id="delivery" name="deliveryBtn" value="5" />
+          <label for="delivery">Delivery (5$)</label>
+        </div>
+
+        <div class="button">
+          <button id="seeOrderBtn">See Order</button>
+        </div>
+
+        <div class="seeOrderDiv">
+        
+          <div id="showOrder">
+          </div>
+
+          <div id="displaySelected">
+          </div>
+
+          <div id="displayDelivery">
+          </div>
+
+      </div>
+
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
