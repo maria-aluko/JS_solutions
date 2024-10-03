@@ -1,5 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  background: orange;
+  font-family: "Raleway", sans-serif;
+}
+
+h1 {
+  padding: 30px;
+}
+
+div {
+  text-align: center;
+}
+
+p {
+  padding: 10px;
+}
+
+img {
+  display: block;
+  padding: 20px;
+}
+
+input {
+  padding: 3px 5px;
+  border-radius: 10px;
+  height: 35px;
+  text-align: center;
+}
+
+#userQuest {
+  width: 400px;
+}
 
 .answerButton {
   display: block;
+  text-align: center;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  margin: auto;
+  background: purple;
+  color: white;
 }

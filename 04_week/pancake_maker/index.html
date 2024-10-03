@@ -46,38 +46,27 @@
         <div class="customer-container">
           <h2>Delivery Information</h2>
           <p>Please enter your name:</p>
-            <input type="text" id="customerName" value="" placeholder="Your name" required/>
+            <input type="text" id="customerName" placeholder="Your name" required/>
         </div>
         <div class="delivery-container">
           <p>Choose your delivery method:</p>
-          <input type="radio" id="eatIn" name="deliveryBtn" value="0" required/>
-          <label for="eatIn">Eat In</label>
+          <label for="eatIn"><input type="radio" id="eatIn" name="deliveryBtn" value="0" required/>Eat In</label>
 
-          <input type="radio" id="pickUp" name="deliveryBtn" value="0" />
-          <label for="pickUp">Pick Up</label>
+          <label for="pickUp"><input type="radio" id="pickUp" name="deliveryBtn" value="0" />Pick Up</label>
 
-          <input type="radio" id="delivery" name="deliveryBtn" value="5" />
-          <label for="delivery">Delivery (5$)</label>
+          <label for="delivery"><input type="radio" id="delivery" name="deliveryBtn" value="5" />Delivery (5$)</label>
         </div>
 
         <div class="button">
           <button id="seeOrderBtn">See Order</button>
         </div>
 
-        <div class="seeOrderDiv">
-        
-          <div id="showOrder">
-          </div>
-
-          <div id="displaySelected">
-          </div>
-
-          <div id="displayDelivery">
-          </div>
+        <div id="displayDiv">
+          <p id="displaySelected"></p>
+        </div>
 
       </div>
 
-      </div>
     </div>
     <script src="script.js"></script>
   </body>

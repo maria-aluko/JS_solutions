@@ -6,88 +6,175 @@
 
 body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
-  font-size: smaller;
-}
-
-h2 {
-  margin-bottom: 15px;
+  background-color: rgb(0, 174, 255);;
 }
 
 .search-container {
-  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchForm {
+  flex: 1;
 }
 
 .search-container input {
-  display: inline-block;
-  padding: 6px;
+  padding: 0.5rem;
   border-radius: 4px;
-  border-style: 1px solid #505050;
-  margin: 5px 0 5px 10px;
+  border-style: 0.5px solid #c3c3c3;
+  margin: 0 1rem;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;;
 }
 
-.divider-container {
-  background: rgb(0, 174, 255);
-  width: 100vw;
-  height: 30px;
+#searchResult {
+  flex: 1;
+  display: block;
+  padding: 0.2rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+h2 {
+  margin-bottom: 1rem;
 }
 
 .main-content {
-  margin: 20px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .form-container {
-  margin-bottom: 20px;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 6px;
+  padding: 2rem;
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  flex: 1;
 }
 
 .form-container input {
-  padding: 6px;
+  flex: 1;
+  padding: 0.5rem;
   border-radius: 4px;
   border-style: 1px solid #505050;
-  margin: 5px 0;
-  width: 80%;
+  margin: 0.3rem auto;
+  width: 100%;
   max-width: 300px;
+  font-family: inherit;
+}
+
+.form-container label {
+  margin: 0 auto;
+  flex: 1;
+}
+
+button.delete {
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 174, 255);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+button.delete:hover {
+  color: #333;
 }
 
 .table-container {
-  flex: 1;
-  margin-left: 40px;
+  flex: 2;
+  margin: 1rem;
+  background-color: white;
+  border-radius: 6px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-table, th, td {
-  border: 1px solid #505050;
+table {
   border-collapse: collapse;
-  padding: 8px 20px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #505050;
+  text-align: left;
+  padding: 0.5rem;
   color: white;
-  background: rgb(0, 174, 255);
+  background-color: rgb(0, 174, 255);
 }
 
 td {
-  background: white;
-  padding: 8px;
+  background: rgb(243, 243, 243);
   font-size: 0.8rem;
   color: #333;
 }
 
-#resetForm, #searchButton, #addCar {
-  padding: 8px 15px;
+#messageDiv {
+  margin-top: 1rem;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+}
+
+#messageDiv.success {
+  background-color: #4caf50;
+  color: white;
+  visibility: visible;
+}
+
+#messageDiv.error {
+  background-color: #f44336;
+  color: white;
+  visibility: visible;
+}
+
+button {
+  font-family: inherit;
+  padding: 0.5rem 1rem;
   color: white;
   background: rgb(0, 174, 255);
   border: none;
   outline: none;
+  cursor: pointer;
   border-radius: 7px;
-  margin-top: 10px;
-  margin-bottom: 25px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
 }
 
-#searchButton {
-  margin-left: 10px;
-}
-
-#displayError {
-  color: rgb(210, 0, 0);
+button:hover {
+  background-color: rgb(0, 145, 213);
 }
 
 footer {
-  margin-left: 20px;
+  margin: 2rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .main-content {
+    flex-direction: column;
+  }
 }

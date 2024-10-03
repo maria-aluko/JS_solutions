@@ -1,9 +1,8 @@
 'use strict';
 
-const carForm = document.getElementById('carForm');
-const searchForm = document.getElementById('searchForm');
-
 const carArray = [];
+const carForm = document.querySelector('#carForm');
+const searchForm = document.querySelector('#searchForm');
 
 class Car {
   constructor(licensePlate, maker, model, currentOwner, price, color, year, discountPrice) {
@@ -11,70 +10,85 @@ class Car {
     this.maker = maker;
     this.model = model;
     this.currentOwner = currentOwner;
-    this.price = price;
+    this.price = parseFloat(price);
     this.color = color;
-    this.year = year;
+    this.year = parseInt(year);
     this.discountPrice = discountPrice;
   }
 }
 
-// make the input type as number, so there is less conditions to check
+function displayMessage(message, type = "success") {
+  const messageDiv = document.getElementById('messageDiv');
+  messageDiv.textContent = message;
+  messageDiv.className = type;
+
+  setTimeout(function () {
+    messageDiv.textContent = '';
+    messageDiv.className = '';
+  }, 2000);
+}
 
 function addNewCar(e) {
   e.preventDefault();
 
-  const licensePlate = document.getElementById('licensePlate').value;
-  const maker = document.getElementById('maker').value;
-  const model = document.getElementById('model').value;
-  const currentOwner = document.getElementById('currentOwner').value;
-  const price = document.getElementById('price').value;
-  const color = document.getElementById('color').value;
-  const year = document.getElementById('year').value;
+  try {
+    const licensePlate = document.getElementById('licensePlate').value.trim();
+    const maker = document.getElementById('maker').value.trim();
+    const model = document.getElementById('model').value.trim();
+    const currentOwner = document.getElementById('currentOwner').value.trim();
+    const price = parseFloat(document.getElementById('price').value.trim());
+    const color = document.getElementById('color').value.trim();
+    const year = parseInt(document.getElementById('year').value.trim());
+    let discountPrice = '';
 
-  const discountRate = 0.85;
-  const date = new Date();
-  let yearToday = date.getFullYear();
-  let refYear = yearToday - 10;
-  let discountPrice;
-  console.log(yearToday);
-  if (year <= refYear) {
-    discountPrice = price * discountRate;
-  } else {
-    discountPrice = 'N/A';
+    const discountRate = 0.85;
+    const date = new Date();
+    let yearToday = date.getFullYear();
+    let refYear = yearToday - 10;
+    if (year <= refYear) {
+      discountPrice = price * discountRate;
+    } else {
+      discountPrice = 'No discount';
+    }
+
+    if (year === '') {
+      throw new Error('Please enter a year');
+    }
+    if (isNaN(year)) {
+      throw new Error('Please enter a valid number');
+    }
+    if (year < 1886) {
+      throw new Error(`Year must be between 1886 and ${yearToday}`);
+    }
+    if (year > 2024) {
+      throw new Error(`Year must be between 1886 and ${yearToday}`);
+    }
+    if (price <= 0) {
+      throw new Error('Price must be a positive number');
+    }
+
+    const newCar = new Car(licensePlate, maker, model, currentOwner, price, color, year, discountPrice);
+    carArray.push(newCar);
+    console.log(carArray);
+
+
+    localStorage.setItem('carArray', JSON.stringify(carArray));
+    createTable();
+    displayMessage('Car added successfully!');
+
+  } catch (error) {
+    displayMessage(error.message, 'error');
   }
-
-  errorHandle();
-
-  const newCar = new Car(licensePlate, maker, model, currentOwner, price, color, year, discountPrice);
-
-  carArray.push(newCar);
-  createTable();
 }
 
-function errorHandle() {
-  const errorMessage = document.getElementById('displayError');
-  let year = document.getElementById('year').value;
-  let price = document.getElementById('price').value;
-  let maker = document.getElementById('maker').value;
-  let currentOwner = document.getElementById('currentOwner').value;
-  let color = document.getElementById('color').value;
-  errorMessage.textContent = '';
-  console.log(typeof maker);
-  try {
-    //conditions with if
-    if (year.trim() == '') throw 'Please enter a year';
-    if (isNaN(year)) throw 'Please enter a valid number';
-    year = Number(year);
-    if (year < 1886) throw 'Please enter a correct year';
-    if (year > 2024) throw 'A car can not be made in the future';
-    if (price < 0) throw 'Price must be a positive number';
-    if (typeof maker === 'number') throw 'Car make can not be a number';
-    if (typeof currentOwner === 'number') throw 'Car owner can not be a number';
-    if (typeof color === 'number') throw 'Car color can not be a number';
-  }
-  catch (error) {
-    errorMessage.textContent = error;
-    throw error; // this is added so that the code won't continue until errors are cleared
+function loadFromLocalStorage() {
+  const storedCarArray = localStorage.getItem('carArray');
+  if (storedCarArray) {
+    const parseCarArray = JSON.parse(storedCarArray);
+    parseCarArray.forEach(carObject => {
+      carArray.push(new Car(carObject.licensePlate, carObject.maker, carObject.model, carObject.currentOwner, carObject.price, carObject.color, carObject.year, carObject.discountPrice));
+    });
+    createTable();
   }
 }
 
@@ -82,53 +96,54 @@ function errorHandle() {
 function createTable() {
   const table = document.querySelector('#carTable');
   table.innerHTML = table.rows[0].innerHTML;
-  carArray.forEach(car => {
+  carArray.forEach((car, index) => {
     const row = table.insertRow(-1);
+    const { licensePlate, maker, model, currentOwner, price, color, year, discountPrice } = car;
+    const carInfo = [licensePlate, maker, model, currentOwner, price, color, year, discountPrice];
 
-    Object.values(car).forEach(text => {
+    carInfo.forEach(info => {
       const cell = row.insertCell(-1);
-      cell.textContent = text;
-    })
-  })
+      cell.textContent = info;
+    });
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('delete');
+
+    deleteButton.addEventListener('click', () => deleteCar(index));
+    row.insertCell(-1).appendChild(deleteButton);
+  });
+};
+
+function deleteCar(index) {
+  carArray.splice(index, 1);
+  localStorage.setItem('carArray', JSON.stringify(carArray));
+  createTable();
+  displayMessage('Car deleted successfully!');
 }
 
 function searchCar(e) {
   e.preventDefault();
   const textField = document.getElementById('searchResult');
-  const priceField = document.getElementById('priceDisplay');
-  const searchField = document.getElementById('searchField');
-  const searchValue = searchField.value.toLowerCase().toString();
-  const result = carArray.filter(e => searchValue.includes(e.licensePlate));
-  priceField.textContent = '';
+  const searchField = document.getElementById('searchField').value.trim().toLowerCase();
+  const result = carArray.filter(car => searchField.includes(car.licensePlate.toLowerCase()));
 
   if (result.length <= 0) {
     textField.textContent = 'No car found with this license plate. Please enter the license plate in the following format: ABC123. Try again?';
   }
   else {
-    textField.textContent = `License number ${searchValue} is ${result[0].maker} ${result[0].model} and it belongs to ${result[0].currentOwner}. The car price is ${result[0].price}.`
-    if (result[0].year < 2014) {
-      priceField.textContent = `The discounted price is ${result[0].discountPrice}`;
-    } else {
-      priceField.textContent = '';
-    }
+    textField.innerHTML = `
+      <p>Make: ${result[0].maker}</p>
+      <p>Model: ${result[0].model}</p>
+      <p>Owner: ${result[0].currentOwner}</p>
+      <p>Year: ${result[0].year}</p>
+      <p>Color: ${result[0].color}</p>
+      <p>Original Price: $${result[0].price}</p>
+      <p>Discounted Price: $${result[0].discountPrice}</p>
+    `;
   }
 }
 
 carForm.addEventListener('submit', addNewCar);
 searchForm.addEventListener('submit', searchCar);
-
-
-/* localStorage.setItem('cars', JSON.stringify(cars))
-
-let cars = JSON.parse(localStorage.getItem('cars'));
-
-if (cars == undefined) {
-  cars = [];
-}
-
-later you can remove it
-
-localStorage.removeItem('cars');
-cars = [];
-
-*/
+window.addEventListener('load', loadFromLocalStorage);

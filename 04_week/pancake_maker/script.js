@@ -6,10 +6,10 @@ const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 const displayPrices = document.querySelectorAll('#totalPrice');
 const radios = document.querySelectorAll('input[type="radio"]');
 const seeOrderBtn = document.getElementById('seeOrderBtn');
-let showOrder = document.getElementById('showOrder');
-const customerName = document.getElementById('customerName').textContent;
+const customer = document.getElementById('customerName');
 const displayDiv = document.getElementById('displaySelected');
-const displayDelivery = document.querySelectorAll('#delivery-container');
+const orders = [];
+const shakeMe = document.querySelector('.price-banner');
 
 // Main section
 
@@ -34,41 +34,62 @@ function calcPrice() {
   });
 }
 
-// Button section
-
-function btnFunction() {
-  const typeSelected = pancakeType.options[pancakeType.selectedIndex].textContent;
-  const selectedArr = [];
-  showOrder.style.display = 'block';
-  showOrder.textContent = `Pancake type: ${typeSelected}`;
-}
-
-function btnFunction() {
-  const typeSelected = pancakeType.options[pancakeType.selectedIndex].textContent;
-
-  showOrder.style.display = 'block';
-  showOrder.textContent = `Pancake type: ${typeSelected}`;
-}
-
-function displayCheckboxes() {
-  const selectedArr = [];
-  displayDiv.style.display = 'block';
-
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      selectedArr.push(`${checkbox.id}`);
-    };
-  });
-
-  if (selectedArr.length == 0) {
-    displayDiv.textContent = 'You did not choose any extras.';
-  } else {
-    displayDiv.textContent = 'Your selected extras: ' + `${selectedArr.join(', ')}`;
+class Order {
+  constructor(typeSelected, selectedCheckboxes, customerName, selectedDelivery, totalPrice) {
+    this.typeSelected = typeSelected;
+    this.selectedCheckboxes = selectedCheckboxes;
+    this.customerName = customerName;
+    this.selectedDelivery = selectedDelivery
+    this.totalPrice = totalPrice;
   }
 }
 
-function displayDeliveryInfo() {
-  displayDelivery.style.display = 'block';
+function testDisplay() {
+  const typeSelected = pancakeType.options[pancakeType.selectedIndex].textContent;
+  const customerName = customer.value;
+  const selectedCheckboxes = [];
+  let selectedDelivery = '';
+  let toppingsText;
+
+  try {
+    if (customerName === '') throw 'Please enter your name';
+  } catch (error) {
+    errorMessage.textContent = error;
+    throw error;
+  }
+
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      selectedCheckboxes.push(checkbox.parentElement.textContent);
+      // add the cost per checkbox ? (+ ' - $' + checkbox.value);
+    } if (selectedCheckboxes.length == 0) {
+      toppingsText = 'You did not choose any extras.';
+    } else {
+      toppingsText = '';
+    }
+  });
+
+  radios.forEach((radio) => {
+    if (radio.checked) {
+      selectedDelivery = radio.parentElement.textContent;
+    }
+  });
+
+  const newOrder = new Order(typeSelected, selectedCheckboxes, customerName, selectedDelivery, totalPrice[0].textContent);
+  orders.push(newOrder);
+
+  displayDiv.style.display = 'block';
+  displayDiv.innerHTML = `Hello ${customerName}, please see your order details below:<br />Selected pancake: ${typeSelected}<br />Chosen toppings: ${selectedCheckboxes.join(', ')}${toppingsText}<br />Delivery method: ${selectedDelivery}<br />Total Price: ${totalPrice[0].textContent
+    } `;
+
+  console.log(orders);
+}
+
+function makePriceShake() {
+  shakeMe.classList.add('shake');
+  setTimeout(() => {
+    shakeMe.classList.remove('shake');
+  }, 500);
 }
 
 // Event Listeners
@@ -83,6 +104,9 @@ radios.forEach((radio) => {
   radio.addEventListener('change', calcPrice);
 });
 
-seeOrderBtn.addEventListener('click', btnFunction);
+seeOrderBtn.addEventListener('click', testDisplay);
+// seeOrderBtn.addEventListener('click', displayCheckboxes);
 
-seeOrderBtn.addEventListener('click', displayCheckboxes);
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', makePriceShake);
+});

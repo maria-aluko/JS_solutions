@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overscroll-behavior: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: rgb(89, 189, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+}
+
+p {
+  line-height: 1.5;
+}
+
+header, section, footer {
+  padding: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  position: fixed;
+  align-items: center;
+  color: lightgoldenrodyellow;
+  width: 100%;
+  background-color: transparent;
+}
+
+.mobile {
+  display: none;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+nav ul li a {
+  color: lightgoldenrodyellow;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+nav ul li a:hover {
+  color: #333;
+  background-color: lightgoldenrodyellow;
+  border-radius: 3px;
+}
+
+#hero {
+  background: url("pexels-pixabay-355465.jpg") no-repeat center center/cover;
+  padding-top: 100px;
+}
+
+section {
+  height: 45vh;
+  scroll-margin-top: 5rem;
+  color: lightgoldenrodyellow;
+}
+
+section:first-child {
+  background-color: pink;
+
+}
+
+section:nth-child(2) {
+  background-color: green;
+}
+
+section:last-child {
+  background-color: purple;
+}
+
+button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: none;
+  font-family: inherit;
+  background: rgb(255, 153, 0);
+  color: white;
+  font-size: inherit;
+}
+
+.overlay {
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay.visible {
+  display: flex;
+}
+
+.modal {
+  background-color: lightpink;
+  color: #333;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #333;
+  padding: 2rem;
+  width: 80vw;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+#backTopBtn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+@media screen and (max-width: 745px){
+  .mobile {
+    display: block;
+  }
+  
+  nav ul {
+    display: none;
+  }
+
+  nav ul.responsive {
+    display: block;
+    background-color: lightgray;
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+
+  ul.responsive li {
+    display: block;
+    margin: 2rem 0rem;
+  }
+
+  nav ul.responsive li a {
+    color: #333;
+  }
+
+}

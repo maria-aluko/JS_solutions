@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <title>8 Ball</title>
-  <script src="8ball.js">
-
-  </script>
 
 </head>
 <body>
@@ -16,14 +15,25 @@
   <p>Hello, please enter your name below</p>
   <input type="text" id="userName" value="">
 
+  <p class="welcome">
+    
+  </p>
+
   <p>Enter a Yes-or-No question below and click on the Green Button</p>
   
   <input type="text" id="userQuest" value="">
-  <input type="image" src=" ENTER HERE An IMAGE" alt="magicBall" id="ballButton";>
 
-  <button type="button" class="answerButton" id="answerButton" onclick="compGame()">Click here for an answer!</button>
+  <img alt="magicBall" id="ballButton"/>
+
+  <button type="button" class="answerButton" id="answerButton">Click here for an answer!</button>
 
 </div>  
+
+
+
+<script src="8ball.js">
+
+</script>
 
 </body>
 </html>
