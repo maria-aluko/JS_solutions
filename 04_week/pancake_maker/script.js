@@ -6,12 +6,11 @@ const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 const displayPrices = document.querySelectorAll('#totalPrice');
 const radios = document.querySelectorAll('input[type="radio"]');
 const seeOrderBtn = document.getElementById('seeOrderBtn');
-const customer = document.getElementById('customerName');
 const displayDiv = document.getElementById('displaySelected');
 const orders = [];
 const shakeMe = document.querySelector('.price-banner');
 
-// Main section
+// Calculate price
 
 function calcPrice() {
   const typeSelected = pancakeType.options[pancakeType.selectedIndex];
@@ -34,68 +33,82 @@ function calcPrice() {
   });
 }
 
-class Order {
-  constructor(typeSelected, selectedCheckboxes, customerName, selectedDelivery, totalPrice) {
-    this.typeSelected = typeSelected;
-    this.selectedCheckboxes = selectedCheckboxes;
-    this.customerName = customerName;
-    this.selectedDelivery = selectedDelivery
-    this.totalPrice = totalPrice;
-  }
-}
-
+// Display order
 function testDisplay() {
-  const typeSelected = pancakeType.options[pancakeType.selectedIndex].textContent;
-  const customerName = customer.value;
-  const selectedCheckboxes = [];
+  const toppings = document.querySelectorAll('.customization-section1 input[type="checkbox"]');
+  const extras = document.querySelectorAll('.customization-section2 input[type="checkbox"]');
+  const customer = document.getElementById('customerName').value || 'Guest';
+  const typeSelected = pancakeType.options[pancakeType.selectedIndex].textContent.split('-')[0].trim();
+  const selectedToppings = [];
+  const selectedExtras = [];
   let selectedDelivery = '';
   let toppingsText;
+  let extrasText;
 
-  try {
-    if (customerName === '') throw 'Please enter your name';
-  } catch (error) {
-    errorMessage.textContent = error;
-    throw error;
-  }
-
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      selectedCheckboxes.push(checkbox.parentElement.textContent);
-      // add the cost per checkbox ? (+ ' - $' + checkbox.value);
-    } if (selectedCheckboxes.length == 0) {
-      toppingsText = 'You did not choose any extras.';
+  toppings.forEach((topping) => {
+    if (topping.checked) {
+      selectedToppings.push(topping.parentElement.textContent);
+    } if (selectedToppings.length == 0) {
+      toppingsText = 'You did not choose any toppings.';
     } else {
       toppingsText = '';
     }
   });
 
-  radios.forEach((radio) => {
-    if (radio.checked) {
-      selectedDelivery = radio.parentElement.textContent;
+  extras.forEach((extra) => {
+    if (extra.checked) {
+      selectedExtras.push(extra.parentElement.textContent.split('-')[0].trim());
+    } if (selectedExtras.length == 0) {
+      extrasText = 'You did not choose any extras.';
+    } else {
+      extrasText = '';
     }
   });
 
-  const newOrder = new Order(typeSelected, selectedCheckboxes, customerName, selectedDelivery, totalPrice[0].textContent);
+  radios.forEach((radio) => {
+    if (radio.checked) {
+      selectedDelivery = radio.parentElement.textContent.split('-')[0].trim();
+    }
+  });
+
+
+  class Order {
+    constructor(typeSelected, selectedToppings, selectedExtras, customer, selectedDelivery, totalPrice) {
+      this.typeSelected = typeSelected;
+      this.selectedToppings = selectedToppings;
+      this.selectedExtras = selectedExtras;
+      this.customer = customer;
+      this.selectedDelivery = selectedDelivery
+      this.totalPrice = totalPrice;
+    }
+  }
+
+  const newOrder = new Order(typeSelected, selectedToppings, selectedExtras, customer, selectedDelivery, totalPrice[0].textContent);
   orders.push(newOrder);
 
   displayDiv.style.display = 'block';
-  displayDiv.innerHTML = `Hello ${customerName}, please see your order details below:<br />Selected pancake: ${typeSelected}<br />Chosen toppings: ${selectedCheckboxes.join(', ')}${toppingsText}<br />Delivery method: ${selectedDelivery}<br />Total Price: ${totalPrice[0].textContent
-    } `;
-
+  displayDiv.innerHTML = `
+    <p><strong>Please see your order details below:</strong></p>
+    <p><strong>Name:</strong> ${customer}</p>
+    <p><strong>Selected pancake:</strong> ${typeSelected}</p>
+    <p><strong>Chosen toppings:</strong> ${selectedToppings.join(', ')}${toppingsText}</p>
+    <p><strong>Chosen extras:</strong> ${selectedExtras.join(', ')}${extrasText}</p>
+    <p><strong>Delivery method:</strong> ${selectedDelivery}</p>
+    <p><strong>Total Price: ${totalPrice[0].textContent}</strong> </p>
+    `;
   console.log(orders);
 }
 
+// Animation for price change
 function makePriceShake() {
   shakeMe.classList.add('shake');
   setTimeout(() => {
     shakeMe.classList.remove('shake');
-  }, 500);
+  }, 300);
 }
 
 // Event Listeners
-
 pancakeType.addEventListener('change', calcPrice);
-
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', calcPrice);
 });
@@ -105,8 +118,13 @@ radios.forEach((radio) => {
 });
 
 seeOrderBtn.addEventListener('click', testDisplay);
-// seeOrderBtn.addEventListener('click', displayCheckboxes);
 
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', makePriceShake);
 });
+
+radios.forEach((radio) => {
+  radio.addEventListener('change', makePriceShake);
+});
+
+pancakeType.addEventListener('change', makePriceShake);

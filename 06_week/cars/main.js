@@ -68,6 +68,7 @@ function addNewCar(e) {
     }
 
     const newCar = new Car(licensePlate, maker, model, currentOwner, price, color, year, discountPrice);
+    carForm.reset();
     carArray.push(newCar);
     console.log(carArray);
 

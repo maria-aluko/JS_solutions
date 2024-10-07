@@ -22,7 +22,6 @@ body {
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -44,8 +43,8 @@ body {
 
 @keyframes shake {
   0% { transform: translateX(0); }
-  10%, 30%, 50% { transform: translateX(-10px); }
-  20%, 40% { transform: translateX(10px); }
+  10%, 30%, 50% { transform: translateX(-5px); }
+  20%, 40% { transform: translateX(5px); }
   100% { transform: translateX(0); }
 }
 
@@ -60,7 +59,7 @@ body {
 }
 
 #type {
-  border-style: none;
+  border-style: 1px solid #5a4a42;;
   padding: 3px;
   font-family: "Raleway", Verdana, sans-serif;
   background-color: #fff8f0;
@@ -68,11 +67,26 @@ body {
   font-size: 1rem;
 }
 
+.customer {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+}
+
 #customerName {
-  padding: 5px 10px;
-  border-radius: 8px;
-  border: solid 1px #fff8f0;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  border-style: 1px solid #5a4a42;
   font-family: "Raleway", Verdana, sans-serif;
+  background-color: #fff8f0;
+  color: #5a4a42;
+}
+
+.delivery-container label {
+  margin: 0.5rem 1rem 0.5rem 0rem;
+  display: block;
 }
 
 h2 {
@@ -80,7 +94,7 @@ h2 {
 }
 
 .button {
-  margin-top: 25px;
+  margin: 0.5 0rem;
 }
 
 #seeOrderBtn {
