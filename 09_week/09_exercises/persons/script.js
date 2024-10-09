@@ -12,7 +12,7 @@ async function fetchData() {
   }
 }
 
-// loop through data, create a div per user and display data inside the div
+// loop through data, create a div per user and display data inside the div, append to the main div
 
 function displayCards(users) {
   users.forEach(user => {
@@ -22,7 +22,7 @@ function displayCards(users) {
     const avatar = `https://robohash.org/${user.id}?set=set4`;
     card.innerHTML = `
     <img src='${avatar}'>
-    <p><strong>${user.name}</strong></p>
+    <p id="userName"><strong>${user.name}</strong></p>
     <p><strong>Username:</strong> ${user.username}</p>
     <p><strong>Email:</strong> ${user.email}</p>
     `;

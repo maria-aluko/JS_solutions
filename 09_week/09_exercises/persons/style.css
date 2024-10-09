@@ -5,14 +5,29 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Oswald", Arial, Helvetica, sans-serif;
   background: linear-gradient(180deg, rgba(214,239,255,1) 0%, rgba(244,225,255,1) 50%);
 }
 
 header {
   margin: 75px auto;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
+}
+
+header img {
+  height: 50px;
+  width: auto;
+  margin: 0 5px;
+}
+
+h1 {
+  display: inline-block;
+  font-weight: 400;
+}
+
+.paws {
+ display: inline-block;
 }
 
 .gridContainer {
@@ -20,19 +35,20 @@ header {
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  gap: 30px;
+  gap: 40px;
   margin: 50px 20px;
 }
 
 .card {
-  height: 350px;
+  height: 320px;
   width: 250px;
   border: 1.5px solid #454545;
   border-radius: 6px;
   padding: 10px;
-  box-shadow: 0 4px 6px rgba(67, 67, 67, 0.2);
-  line-height: 1.5;
-  background: linear-gradient(180deg, rgba(163,163,163,1) 0%, rgba(242,242,246,1) 50%, rgba(255,255,255,1) 100%);
+  box-shadow: 2px 6px 6px rgba(67, 67, 67, 0.2);
+  line-height: 1.7;
+  background: radial-gradient(circle, white, #bfddfa);
+  font-size: 1rem;
 }
 
 .card p {
@@ -40,9 +56,31 @@ header {
   padding-left: 15px;
 }
 
+#userName {
+  font-size: 1.2rem;
+}
+
 img {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   display: block;
   margin: 10px auto;
+}
+
+footer {
+  margin: 50px 0 25px 0;
+  text-align: center;
+}
+
+.sources {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: rgb(127, 127, 127);
 }

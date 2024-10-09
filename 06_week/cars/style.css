@@ -144,13 +144,13 @@ tr:nth-child(even) {
 }
 
 #messageDiv.success {
-  background-color: #4caf50;
+  background-color: #1aab1f;
   color: white;
   visibility: visible;
 }
 
 #messageDiv.error {
-  background-color: #f44336;
+  background-color: #ff2e1f;
   color: white;
   visibility: visible;
 }
@@ -191,10 +191,12 @@ footer {
 
   .search-container {
     flex-direction: column;
+    margin: 1rem;
+    width: 95%;
   }
 
   .form-container {
-    width: 90%;
+    width: 95%;
     margin: 0 1rem;
   }
 
@@ -206,6 +208,13 @@ footer {
 
   #backTopBtn {
     right: 2rem;
+  }
+
+  #searchResult {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 1rem auto;
   }
 
 }

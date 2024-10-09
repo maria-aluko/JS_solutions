@@ -17,17 +17,6 @@ class Car {
   }
 }
 
-function displayMessage(message, type = "success") {
-  const messageDiv = document.getElementById('messageDiv');
-  messageDiv.textContent = message;
-  messageDiv.className = type;
-
-  setTimeout(function () {
-    messageDiv.textContent = '';
-    messageDiv.className = '';
-  }, 2000);
-}
-
 function addNewCar(e) {
   e.preventDefault();
 
@@ -51,6 +40,11 @@ function addNewCar(e) {
       discountPrice = 'No discount';
     }
 
+    const double = carArray.filter(car => licensePlate.toLowerCase().includes(car.licensePlate.toLowerCase()));
+
+    if (double.length > 0) {
+      throw new Error('A car with this license plate is already in the database');
+    }
     if (year === '') {
       throw new Error('Please enter a year');
     }
@@ -72,7 +66,6 @@ function addNewCar(e) {
     carArray.push(newCar);
     console.log(carArray);
 
-
     localStorage.setItem('carArray', JSON.stringify(carArray));
     createTable();
     displayMessage('Car added successfully!');
@@ -92,7 +85,6 @@ function loadFromLocalStorage() {
     createTable();
   }
 }
-
 
 function createTable() {
   const table = document.querySelector('#carTable');
@@ -115,6 +107,17 @@ function createTable() {
     row.insertCell(-1).appendChild(deleteButton);
   });
 };
+
+function displayMessage(message, type = "success") {
+  const messageDiv = document.getElementById('messageDiv');
+  messageDiv.textContent = message;
+  messageDiv.className = type;
+
+  setTimeout(function () {
+    messageDiv.textContent = '';
+    messageDiv.className = '';
+  }, 2000);
+}
 
 function deleteCar(index) {
   carArray.splice(index, 1);
