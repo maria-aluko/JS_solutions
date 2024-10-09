@@ -90,7 +90,7 @@ body {
 }
 
 h2 {
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 .button {
@@ -108,17 +108,21 @@ h2 {
   color: white;
 }
 
-.displaySelected {
-  padding-top: 30px;
+#displayDiv {
+  line-height: 0.75;
 }
 
-@media screen and (min-width: 700px) {
+#totalOrder {
+  font-size: 1.25rem;
+}
+
+@media only screen and (min-width: 700px) {
   .container {
     flex-direction: row;
   }
 }
 
-@media screen and (max-width: 700px) {
+@media only screen and (max-width: 700px) {
   .container {
     flex-direction: column;
   }

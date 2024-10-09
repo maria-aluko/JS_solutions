@@ -32,7 +32,7 @@ function addNewCar(e) {
   e.preventDefault();
 
   try {
-    const licensePlate = document.getElementById('licensePlate').value.trim();
+    const licensePlate = document.getElementById('licensePlate').value.toUpperCase().trim();
     const maker = document.getElementById('maker').value.trim();
     const model = document.getElementById('model').value.trim();
     const currentOwner = document.getElementById('currentOwner').value.trim();
@@ -134,16 +134,22 @@ function searchCar(e) {
   }
   else {
     textField.innerHTML = `
-      <p>Make: ${result[0].maker}</p>
-      <p>Model: ${result[0].model}</p>
-      <p>Owner: ${result[0].currentOwner}</p>
-      <p>Year: ${result[0].year}</p>
-      <p>Color: ${result[0].color}</p>
-      <p>Original Price: $${result[0].price}</p>
-      <p>Discounted Price: $${result[0].discountPrice}</p>
+      <p><strong>Make:</strong> ${result[0].maker}</p>
+      <p><strong>Model:</strong> ${result[0].model}</p>
+      <p><strong>Owner:</strong> ${result[0].currentOwner}</p>
+      <p><strong>Year:</strong> ${result[0].year}</p>
+      <p><strong>Color:</strong> ${result[0].color}</p>
+      <p><strong>Original Price:</strong> $${result[0].price}</p>
+      <p><strong>Discounted Price:</strong> $${result[0].discountPrice}</p>
     `;
   }
 }
+
+const backToTop = document.querySelector('#backTopBtn');
+backToTop.addEventListener('click', () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
 
 carForm.addEventListener('submit', addNewCar);
 searchForm.addEventListener('submit', searchCar);

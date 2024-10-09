@@ -16,7 +16,7 @@
 
     <form id="searchForm">
       <label for="searchField">License plate
-      <input type="text" id="searchField" name="searchField" required></label>
+      <input type="text" id="searchField" name="searchField" maxlength="10" required></label>
       <button type="submit" id="searchButton">Search</button>
     </form>
   </div>
@@ -83,7 +83,10 @@
   </div>
 </div>
 
-<footer>Copyright &copy Maria Aluko 2024</footer>
+<footer>
+  <p>Copyright &copy Maria Aluko 2024</p>
+  <button id="backTopBtn">&uarr;</button>
+</footer>
 <script src="main.js"></script>
 </body>
 </html>

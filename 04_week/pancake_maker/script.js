@@ -6,7 +6,7 @@ const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 const displayPrices = document.querySelectorAll('#totalPrice');
 const radios = document.querySelectorAll('input[type="radio"]');
 const seeOrderBtn = document.getElementById('seeOrderBtn');
-const displayDiv = document.getElementById('displaySelected');
+const displayDiv = document.getElementById('displayDiv');
 const orders = [];
 const shakeMe = document.querySelector('.price-banner');
 
@@ -88,13 +88,13 @@ function testDisplay() {
 
   displayDiv.style.display = 'block';
   displayDiv.innerHTML = `
-    <p><strong>Please see your order details below:</strong></p>
+    <p><strong>Order no:</strong> ${orders.indexOf(newOrder)}</p>
     <p><strong>Name:</strong> ${customer}</p>
     <p><strong>Selected pancake:</strong> ${typeSelected}</p>
     <p><strong>Chosen toppings:</strong> ${selectedToppings.join(', ')}${toppingsText}</p>
     <p><strong>Chosen extras:</strong> ${selectedExtras.join(', ')}${extrasText}</p>
     <p><strong>Delivery method:</strong> ${selectedDelivery}</p>
-    <p><strong>Total Price: ${totalPrice[0].textContent}</strong> </p>
+    <p id="totalOrder"><strong>Total Price: ${totalPrice[0].textContent}</strong> </p>
     `;
   console.log(orders);
 }
