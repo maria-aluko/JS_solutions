@@ -43,14 +43,10 @@ body {
 }
 
 #type {
-    display: block;
-    width: 200px;
-    cursor: pointer;
+  width: 150px;
 }
 
-#type option {
-  
-}
+/* Toppings and extras  */
 
 .customization-section {
   font-weight: 600;
@@ -60,6 +56,10 @@ body {
   margin: 30px 0;
 }
 
+.customization-section2 {
+  margin: 0 0 30px 0;
+}
+
 input[type="checkbox"] {
   opacity: 0;
   position: absolute;
@@ -67,24 +67,48 @@ input[type="checkbox"] {
 
 .customization-section1 label {
   display: inline-block;
-  margin-right: 50px;
+  margin-right: 2px;
 }
 
 .customization-section2 label {
   display: inline-block;
-  margin-right: 50px;
-  margin-bottom: 10px;
+  margin-right: 2px;
+}
+
+.option {
+  background: white;
+  color: rgb(14, 145, 14);
+  border: 2px solid rgb(14, 145, 14);
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 15px;
+  width: 130px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  height: 20px;
+}
+
+.optionChecked {
+  background: rgb(14, 145, 14);
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 2px solid rgb(14, 145, 14);
+  padding: 10px 20px;
+  margin-top: 15px;
+  color: white;
+  width: 130px;
+  text-align: center;
+  height: 20px;
 }
 
 p {
   font-weight: 600;
-  margin: 10px 0;
+  margin: 0;
 }
 
-h3 {
-
-}
-
+/* Animation */
 
 @keyframes shake {
   0% { transform: translateX(0); }
@@ -96,6 +120,8 @@ h3 {
 .shake {
   animation: shake 0.3s ease-in-out;
 }
+
+/* Pancake choice section */
 
 .form-container {
   flex: 1;

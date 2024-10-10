@@ -11,7 +11,6 @@ const orders = [];
 const shakeMe = document.querySelector('.price-banner');
 
 // Calculate price
-
 function calcPrice() {
   const typeSelected = pancakeType.options[pancakeType.selectedIndex];
   let totalPrice = +typeSelected.value;
@@ -71,7 +70,6 @@ function testDisplay() {
     }
   });
 
-
   class Order {
     constructor(typeSelected, selectedToppings, selectedExtras, customer, selectedDelivery, totalPrice) {
       this.typeSelected = typeSelected;
@@ -106,6 +104,18 @@ function makePriceShake() {
     shakeMe.classList.remove('shake');
   }, 300);
 }
+
+// Change checkbox style when checked
+const labels = document.querySelectorAll('.option');
+checkboxes.forEach((checkbox, i) => {
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+      labels[i].className = 'optionChecked';
+    } else {
+      labels[i].className = 'option';
+    }
+  });
+});
 
 // Event Listeners
 pancakeType.addEventListener('change', calcPrice);
