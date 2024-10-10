@@ -116,7 +116,7 @@ function displayMessage(message, type = "success") {
   setTimeout(function () {
     messageDiv.textContent = '';
     messageDiv.className = '';
-  }, 2000);
+  }, 4000);
 }
 
 function deleteCar(index) {
@@ -142,10 +142,11 @@ function searchCar(e) {
       <p><strong>Owner:</strong> ${result[0].currentOwner}</p>
       <p><strong>Year:</strong> ${result[0].year}</p>
       <p><strong>Color:</strong> ${result[0].color}</p>
-      <p><strong>Original Price:</strong> $${result[0].price}</p>
+      <p><strong>Original Price:</strong> $${result[0].price.toFixed(2)}</p>
       <p><strong>Discounted Price:</strong> $${result[0].discountPrice}</p>
     `;
   }
+  searchForm.reset();
 }
 
 const backToTop = document.querySelector('#backTopBtn');

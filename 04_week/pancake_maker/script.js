@@ -29,7 +29,7 @@ function calcPrice() {
   });
 
   displayPrices.forEach((displayPrice) => {
-    displayPrice.textContent = `$${totalPrice}`;
+    displayPrice.textContent = `$${totalPrice.toFixed(2)}`;
   });
 }
 
