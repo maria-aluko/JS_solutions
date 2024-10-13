@@ -86,6 +86,7 @@ body {
   width: 175px;
   border: 2px solid rgb(14, 145, 14);
   border-radius: 5px;
+  text-align: center;
 }
 
 #type {
@@ -136,8 +137,6 @@ input[type="checkbox"] {
 }
 
 .option:hover {
-  background-color: rgb(14, 145, 14);
-  color: white;
   cursor: pointer;
 }
 
@@ -189,8 +188,6 @@ p {
 }
 
 .radioOption:hover {
-  background-color: rgb(14, 145, 14);
-  color: white;
   cursor: pointer;
 }
 
@@ -227,10 +224,6 @@ p {
   align-items: flex-start;
 }
 
-.button {
-  margin: 0.5 0rem;
-}
-
 #seeOrderBtn {
   background: rgb(14, 145, 14);
   font-family: "Raleway", sans-serif;
@@ -240,6 +233,14 @@ p {
   padding: 10px 20px;
   margin: 15px 0;
   color: white;
+}
+
+#seeOrderBtn:hover {
+  cursor: pointer;
+  color: rgb(14, 145, 14);
+  background-color: white;
+  border: 2px solid rgb(14, 145, 14);
+  padding: 8px 18px;
 }
 
 #displayDiv {
@@ -292,6 +293,13 @@ form input {
   color: white;
 }
 
+#confirmButton:hover {
+  cursor: pointer;
+  color: rgb(14, 145, 14);
+  background-color: white;
+  border: 2px solid rgb(14, 145, 14);
+}
+
 @media only screen and (min-width: 700px) {
   .container {
     flex-direction: row;
@@ -306,7 +314,9 @@ form input {
 
   .image-container img {
     height: auto;
-    object-fit:fill;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .price-banner {
